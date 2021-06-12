@@ -1,0 +1,7 @@
+{
+  "name": "accordion-list-animated",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}

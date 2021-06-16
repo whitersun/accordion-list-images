@@ -1,68 +1,67 @@
 <template>
-  <ion-page>
-    <ion-header :translucent="true">
-      <ion-toolbar>
-        <ion-title>Blank</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    
-    <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Blank</ion-title>
-        </ion-toolbar>
-      </ion-header>
-    
-      <div id="container">
-        <strong>Ready to create an app?</strong>
-        <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-      </div>
-    </ion-content>
-  </ion-page>
+  <base-layout header-title="Login Page">
+    <accordion-001 :list="list">
+      <template v-slot="sp">
+        <ion-item>
+          <div>{{ sp.item.id }} {{ sp.item.name }}</div>
+          <div class="ion-text-wrap">{{ sp.item.body }}</div>
+        </ion-item>
+
+        <ion-button
+          class="ion-float-right"
+          style="zoom: 0.9"
+          v-on:click="buttonClicked(sp.item)"
+        >
+          Detail
+        </ion-button>
+      </template>
+    </accordion-001>
+  </base-layout>
 </template>
 
 <script lang="ts">
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
-import { defineComponent } from 'vue';
+import Accordion001 from "@/components/Accordion/accordion001.vue";
+import { IonItem, IonButton } from "@ionic/vue";
+import { defineComponent } from "vue";
+
+interface ContentData {
+  id?: number;
+  name?: string;
+  body?: string;
+}
 
 export default defineComponent({
-  name: 'Home',
-  components: {
-    IonContent,
-    IonHeader,
-    IonPage,
-    IonTitle,
-    IonToolbar
-  }
+  name: "Home",
+  components: { Accordion001, IonItem, IonButton },
+
+  setup() {
+    const list: Array<ContentData> = [
+      { id: 1, name: "aaron" },
+      { id: 2, name: "andrea" },
+      { id: 3, name: "bryce" },
+      {
+        id: 4,
+        name: "reina",
+        body:
+          "this is some long text that should take up a bunch of space in the panel when it slides down",
+      },
+      {
+        id: 5,
+        name: "ricky",
+        body:
+          "this is some long text that should take up a bunch of space in the panel when it slides down" +
+          " and some more really long text to this item to see what we get",
+      },
+      {
+        id: 5,
+        name: "Mile",
+        body:
+          "this is some long text that should take up a bunch of space in the panel when it slides down",
+      },
+    ];
+    return {
+      list,
+    };
+  },
 });
 </script>
-
-<style scoped>
-#container {
-  text-align: center;
-  
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-  
-  color: #8c8c8c;
-  
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
-}
-</style>
